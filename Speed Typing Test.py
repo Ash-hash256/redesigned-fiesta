@@ -1,12 +1,12 @@
 import tkinter as tk
 import random
-import time
+from timeit import default_timer as timer
 
 List = [["This test is going to place me at the right level"],
        ["My favourite programming will always be python"],
        ["This is a test line"],
        ["The knight killed our king, we want revenge"]]
-
+    
 
 
 class Display(tk.Tk):
@@ -37,29 +37,28 @@ class Display(tk.Tk):
         self.Entry_Widget = tk.Entry(root, width = 70, textvariable = self.v1)
         self.Entry_Widget.pack(pady = 10, padx =10)
         self.Entry_Widget.configure(background = "black", fg = "white",font=("Courier",15))
+        
+        temp = self.v1.get()
+        root.bind('<Key>', lambda x: self.start(x))
+        root.bind('<Return>', lambda x: self.timer(x))
 
-        self.v1.trace_add('write', self.check())
+        #self.v1.trace_add('write', self.check())
         #not sure what it does
         #root.bind('<Return>', self.compare())
 
-    
-    def check(self, *args):
-        #temp = self.v1.get()
-        print("{} this is first print".format(self.v1.get()))
-        #temp = len(temp)
-        #print("{} this is second print".format(temp))
-        #if temp > 0 and temp < 2:
-            #self.start()
-            #print("worked")
-
     #function to start the timer
-    def start(self):
-        self.start_time = time.time()
+    def start(self,x):
+        print(x.char)
+        self.Start = timer()
 
-    #function to stop the timer
-    def stop(self):
-        self.end_time = time.time() - self.start_time
-        print(self.end_time)
+    #gets the time to write the sentece
+    def timer(self,x):
+        print('it worked', x.char)
+        self.end_time = timer()
+        self.result = self.end_time - self.Start
+        print(self.result)
+    
+
 
     def compare(self):
         self.Label_After_Entry = tk.Label(root,text="It worked", width = 70, height = 10)
@@ -73,8 +72,6 @@ class Display(tk.Tk):
         String = String.replace("]","")
         String = String.replace("'","")
         return String
-
-
 
 if __name__ == "__main__":
     root = tk.Tk()
