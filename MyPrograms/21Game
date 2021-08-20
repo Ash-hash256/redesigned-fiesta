@@ -1,0 +1,53 @@
+import random
+class Game21:
+    def __init__(self):
+        self.List1 = []
+        self.List2 = []
+
+    def Hit(self):
+        self.Answer1 = input("Do you want to hit Player 1(example yes/no) ")
+        self.Answer2 = input("Do you want to hit Player 2(example yes/no) ")
+
+    def Anything(self):
+        self.Hit()
+        if self.Answer1 == "no" and self.Answer2 == "no":
+            self.Compare()
+
+        elif self.Answer1 == "yes" and self.Answer2 == "no":
+            self.List1.append(random.randint(1,11))
+            self.game()
+
+        elif self.Answer1 == "no" and self.Answer2 == "yes":
+            self.List2.append(random.randint(1,11))
+            self.game()
+
+        elif self.Answer1 == "yes" and self.Answer2 == "yes":
+            self.List2.append(random.randint(1,11))
+            self.List1.append(random.randint(1,11))
+            self.game()
+       
+    def game(self):
+        print(("Player 1 Score {}       Player2 Scores {}").format(self.List1,self.List2))
+        self.Anything()
+
+    def Compare(self):
+        self.sum1 = 0
+        self.sum2 = 0
+
+        for x in self.List1:
+            self.sum1 += x
+        for i in self.List2:
+            self.sum2 += i
+
+        if self.sum1 < 21 and self.sum1 > self.sum2:
+            print("Winer is Player 1")
+        elif self.sum2 < 21 and self.sum1 < self.sum2:
+            print("Winnter is Player2")
+        elif self.sum1 > 21 and self.sum2 > 21:
+            print("Both numbers are larger than 21 play again")
+            self.game()
+
+
+if __name__ == "__main__":
+    print("The focus of the game is to get more points than your opponent but less than 21")
+    Game21().game()
