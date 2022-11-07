@@ -19,16 +19,16 @@ def calculate_investment():
         if (x % 6) ==0:
             #Interest
             interest = round((initial*interestRate), ndigits=2)
-            print("This is interest for month ", x," interest - ",interest)
 
             current = current + interest
             current = current + additional
             current = round(current,ndigits=2)
             initial = current 
-            x += 1
-            
-        else:    
+            x += 1   
+        else:  
+            #Interest
             interest = round((initial*interestRate), ndigits=2)
+            
             current = current + interest
             current = current + additional
             current = round(current,ndigits=2)
